@@ -1,3 +1,4 @@
+import dotenv from "dotenv";
 import express, { Express } from "express";
 import { Server } from "socket.io";
 import { WebSocket } from "ws";
@@ -5,7 +6,9 @@ import http from "http";
 import cors from "cors";
 import { getCryptoPrices } from "./controller/CryptopricesController";
 
-const url = "wss://stream.binance.com:9443/ws/ethusdt@trade";
+dotenv.config();
+
+const url = process.env.URL_BINANCE as string;
 
 // Express server
 const port = 3000;
@@ -18,7 +21,8 @@ const server = http.createServer(app);
 const ws = new WebSocket(url);
 const io = new Server(server, {
   cors: {
-    origin: "https://crypto-calculator-snowy.vercel.app/",
+    origin:
+      "https://eth-calculator-fullstack-z6arbsbir-kostiantyn-dontsovs-projects.vercel.app/",
     methods: ["GET"],
   },
 });
