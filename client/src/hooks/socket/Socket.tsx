@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { io } from "socket.io-client";
 
-const url = "http://localhost:3000/";
+export const url = import.meta.env.VITE_SERVER_URL;
 
 export const socket = io(url);
 
