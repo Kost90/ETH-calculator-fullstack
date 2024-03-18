@@ -1,4 +1,4 @@
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 import express, { Express } from "express";
 import { Server } from "socket.io";
 import { WebSocket } from "ws";
