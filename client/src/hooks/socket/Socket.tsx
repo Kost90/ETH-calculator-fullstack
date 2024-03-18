@@ -12,10 +12,12 @@ const useSocket = () => {
 
   useEffect(() => {
     function onConnect() {
+      console.log(isConnected)
       setIsConnected(true);
     }
 
     function onDisconnect() {
+      console.log(fooEvents)
       setIsConnected(false);
     }
 
