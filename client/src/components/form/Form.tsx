@@ -1,9 +1,9 @@
 import { FormEvent, useRef, useState } from "react";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
-import { Switch } from "../ui/switch";
+import { Input } from "../ui/shadcn-ui/input";
+import { Label } from "../ui/shadcn-ui/label";
+import { Switch } from "../ui/shadcn-ui/switch";
 import { useAmount } from "@/context/amount-provider";
-import { Button } from "../ui/button";
+import { Button } from "../ui/shadcn-ui/button";
 
 interface IFormData {
   ethAmount: number;

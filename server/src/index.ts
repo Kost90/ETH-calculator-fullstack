@@ -18,7 +18,7 @@ const server = http.createServer(app);
 const ws = new WebSocket(url);
 const io = new Server(server, {
   cors: {
-    origin: "http://localhost:5173",
+    origin: "https://crypto-calculator-snowy.vercel.app/",
     methods: ["GET"],
   },
 });

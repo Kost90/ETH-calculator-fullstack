@@ -29,14 +29,12 @@ const useSocket = () => {
       setData(data);
     });
 
-    socket.on("disconnect", onDisconnect);
-
     return () => {
       socket.off("connect", onConnect);
       socket.off("disconnect", onDisconnect);
       socket.off("received_prices", onFooEvent);
     };
-  }, []);
+  }, [socket]);
 
   return { data };
 };

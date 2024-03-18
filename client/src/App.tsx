@@ -3,6 +3,7 @@ import { AmountProvider } from "./context/amount-provider";
 import { ModeToggle } from "./components/theme-toggle/theme-toggle";
 import FormWrapper from "./components/form/Form";
 import Container from "./components/ui/container";
+import PriceTable from "./components/ui/table";
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <AmountProvider>
         <div className="container p-10">
         <ModeToggle />
+        <PriceTable/>
         <div className="flex flex-col items-center justify-center gap-5">
         <FormWrapper/>
         <Container/>
