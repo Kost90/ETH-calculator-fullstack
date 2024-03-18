@@ -22,7 +22,7 @@ const server = http_1.default.createServer(app);
 const ws = new ws_1.WebSocket(url);
 const io = new socket_io_1.Server(server, {
     cors: {
-        origin: "https://eth-calculator-fullstack-z6arbsbir-kostiantyn-dontsovs-projects.vercel.app/",
+        origin: "https://eth-calculator-fullstack-z6arbsbir-kostiantyn-dontsovs-projects.vercel.app",
         methods: ["GET"],
     },
 });
