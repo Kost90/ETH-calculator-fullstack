@@ -20,7 +20,8 @@ const server = http.createServer(app);
 const ws = new WebSocket(url);
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: "https://eth-calculator-fullstack.vercel.app/",
+    methods:["GET"],
   },
 });
 
