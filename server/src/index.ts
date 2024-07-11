@@ -20,13 +20,9 @@ const server = http.createServer(app);
 const ws = new WebSocket(url);
 const io = new Server(server, {
   cors: {
-    origin: "https://eth-calculator-fullstack.vercel.app/",
+    origin: "*",
     methods:["GET"],
   },
-});
-
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
 });
 
 ws.on("message", async (event) => {
@@ -34,3 +30,9 @@ ws.on("message", async (event) => {
   let data = parseFloat(parse.p);
   io.timeout(5000).emit("received_prices", data);
 });
+
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+
+

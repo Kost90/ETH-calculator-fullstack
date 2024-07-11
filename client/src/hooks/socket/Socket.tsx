@@ -17,6 +17,7 @@ const useSocket = () => {
 
   useEffect(() => {
     socket.on("received_prices", (data: any) => {
+      console.log(data)
       setData(data);
     });
 
