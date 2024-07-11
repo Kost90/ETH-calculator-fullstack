@@ -11,20 +11,24 @@ const useSocket = () => {
   const [data, setData] = useState(0);
   const [event, setEvents] = useState(false);
 
-  function onReceivedEvent() {
+  function handelChangeEvent() {
     setEvents(!event);
   }
 
   useEffect(() => {
-    socket.on("received_prices", (data: any) => {
-      console.log(data)
-      setData(data);
-    });
+    const handleReceivedPrices = (data: number) => {
+      const price = data;
+
+      console.log(data);
+      setData(price);
+    };
+
+    socket.on("received_prices", handleReceivedPrices);
 
     return () => {
-      socket.off("received_prices", onReceivedEvent);
+      socket.off("received_prices", handelChangeEvent);
     };
-  }, [socket]);
+  }, []);
 
   return { data };
 };
