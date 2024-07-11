@@ -1,10 +1,9 @@
-import dotenv from 'dotenv';
+import dotenv from "dotenv";
 import express, { Express } from "express";
 import { Server } from "socket.io";
 import { WebSocket } from "ws";
 import http from "http";
 import cors from "cors";
-import { getCryptoPrices } from "./controller/CryptopricesController";
 
 dotenv.config();
 
@@ -21,33 +20,16 @@ const server = http.createServer(app);
 const ws = new WebSocket(url);
 const io = new Server(server, {
   cors: {
-    origin:
-      "https://eth-calculator-fullstack.vercel.app",
-    methods: ["GET"],
+    origin: "*",
   },
-});
-
-// Soket connection
-io.on("connection", (soket) => {
-  let intervalId: NodeJS.Timeout | null = null;
-  soket.on("data", (data) => {
-    function getData() {
-      return getCryptoPrices();
-    }
-    intervalId = setInterval(() => {
-      const price = getData();
-      soket.broadcast.emit("received_prices", price);
-    }, 5000);
-  });
-
-  // Listen for disconnect event
-  soket.on("disconnect", () => {
-    if (intervalId) {
-      clearInterval(intervalId);
-    }
-  });
 });
 
 server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+});
+
+ws.on("message", async (event) => {
+  let parse = await JSON.parse(event.toString());
+  let data = parseFloat(parse.p);
+  io.timeout(5000).emit("received_prices", data);
 });
