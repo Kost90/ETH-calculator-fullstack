@@ -11,15 +11,16 @@ import useSocket from "@/hooks/socket/Socket";
 import clsx from "clsx";
 import { useEffect, useState } from "react";
 
+const url = import.meta.env.VITE_URL;
+
 function PriceTable() {
-  const { data } = useSocket();
+  const { data } = useSocket(url);
   const [prevPrice, setPrevPrice] = useState(0);
   const [prevData, setPrevData] = useState(0);
 
   useEffect(() => {
     if (prevData > 0) {
-      const data = prevData;
-      setPrevPrice(data);
+      setPrevPrice(prevData);
     }
     setPrevData(data);
   }, [data]);

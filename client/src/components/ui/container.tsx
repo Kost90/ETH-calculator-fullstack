@@ -3,9 +3,11 @@ import { useAmount } from "@/context/amount-provider";
 import useSocket from "@/hooks/socket/Socket";
 import { calcFunc } from "@/lib/utils";
 
+const url = import.meta.env.VITE_URL;
+
 function Container() {
   const [result, setResult] = useState(0);
-  const { data } = useSocket();
+  const { data } = useSocket(url);
   const { amount } = useAmount();
 
   useEffect(() => {

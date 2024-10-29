@@ -16,7 +16,7 @@ export function Form({ setAmount }: { setAmount: (count: number) => void }) {
 
   const handelSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let data: IFormData = {
+    const data: IFormData = {
       ethAmount: 0,
     };
     const formdata = new FormData(e.currentTarget);

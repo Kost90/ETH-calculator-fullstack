@@ -1,34 +1,24 @@
 import { useEffect, useState } from "react";
-import { io } from "socket.io-client";
 
-export const url = import.meta.env.VITE_SERVER_URL;
-
-// export const url = "http://localhost:3000";
-
-export const socket = io(url);
-
-const useSocket = () => {
+const useSocket = (url:string) => {
   const [data, setData] = useState(0);
-  const [event, setEvents] = useState(false);
-
-  function handelChangeEvent() {
-    setEvents(!event);
-  }
 
   useEffect(() => {
-    const handleReceivedPrices = (data: number) => {
-      const price = data;
+    const socket = new WebSocket(url);
 
-      console.log(data);
-      setData(price);
+    const handleReceivedMessage = (event: { data: string; }) => {
+      const parsedData = JSON.parse(event.data);
+      const price = Number(parsedData.p);
+      setData(parseFloat(price.toFixed(2)));
     };
 
-    socket.on("received_prices", handleReceivedPrices);
+    socket.addEventListener("message", handleReceivedMessage);
 
     return () => {
-      socket.off("received_prices", handelChangeEvent);
+      socket.removeEventListener("message", handleReceivedMessage);
+      socket.close();
     };
-  }, []);
+  }, [url]);
 
   return { data };
 };
