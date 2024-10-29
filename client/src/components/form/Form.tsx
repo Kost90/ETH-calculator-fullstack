@@ -53,6 +53,7 @@ export function Form({ setAmount }: { setAmount: (count: number) => void }) {
   );
 }
 
+
 function FormWrapper() {
   const { setAmount } = useAmount();
 
